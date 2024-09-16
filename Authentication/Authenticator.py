@@ -2,7 +2,7 @@ from twitchAPI.twitch import Twitch
 from twitchAPI.oauth import UserAuthenticator
 from twitchAPI.type import AuthScope
 
-from Credentials import APP_ID, APP_SECRET, TARGET_CHANNEL
+from Authentication.Credentials import APP_ID, APP_SECRET, TARGET_CHANNEL
 
 # Credentials
 USER_SCOPE = [AuthScope.CHAT_READ, AuthScope.CHAT_EDIT]
