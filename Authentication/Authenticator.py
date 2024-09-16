@@ -2,11 +2,11 @@ from twitchAPI.twitch import Twitch
 from twitchAPI.oauth import UserAuthenticator
 from twitchAPI.type import AuthScope
 
+from Credentials import APP_ID, APP_SECRET, TARGET_CHANNEL
+
 # Credentials
-APP_ID = ''
-APP_SECRET = ''
-TARGET_CHANNEL = 'NoobForSoup'
 USER_SCOPE = [AuthScope.CHAT_READ, AuthScope.CHAT_EDIT]
+CHANNEL = TARGET_CHANNEL
 
 async def authenticate():
     twitch = await Twitch(APP_ID, APP_SECRET)

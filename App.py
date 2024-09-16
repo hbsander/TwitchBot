@@ -3,30 +3,19 @@ from twitchAPI.type import ChatEvent
 from twitchAPI.chat import Chat, EventData, ChatMessage, ChatSub
 
 # Confidential Variables
-from Credentials import TARGET_CHANNEL, authenticate
-
-# Pynput
-from pynput.keyboard import Key, Controller
+from Authentication.Authenticator import CHANNEL, authenticate
+from Twitch.Chat import readChat
 
 # AsyncIO
 import asyncio
 
-keyboard = Controller()
-
 # Twitch Chat Events
 async def on_ready(ready_event: EventData):
     print('Chat reader is ready, joining channel')
-    await ready_event.chat.join_room(TARGET_CHANNEL)
+    await ready_event.chat.join_room(CHANNEL)
 
 async def on_message(msg: ChatMessage):
-    if 'up' in msg.text:
-        sendInput('w')
-    elif 'left' in msg.text:
-        sendInput('a')
-    elif 'down' in msg.text:
-        sendInput('s')
-    elif 'right' in msg.text:
-        sendInput('d')
+    readChat(msg)
 
 async def on_sub(sub: ChatSub):
     print(f'New subscription in {sub.room.name}:\\n'
@@ -49,9 +38,5 @@ async def run():
     input()
     chat.stop()
     await twitch.close()
-
-def sendInput(msg: str):
-    keyboard.press(msg)
-    keyboard.release(msg)
 
 asyncio.run(run())
